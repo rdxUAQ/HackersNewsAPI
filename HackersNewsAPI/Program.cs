@@ -3,6 +3,14 @@ using HackersNewsAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(7216, listenOptions =>
+    {
+        listenOptions.UseHttps();
+    });
+});
+
 // Add services to the container.
 builder.Services.AddHttpClient();
 builder.Services.AddTransient<IStoriesService, StoriesService>();
